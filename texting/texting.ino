@@ -53,14 +53,14 @@ void loop() {
 
   if ( rxLen > 0 )
   {
-    Serial.print("Receive rxLen:");
-    Serial.println(rxLen);
+    // Serial.println(rxLen);
     
     // for(int i=0;i< rxLen;i++) {
     //   Serial.print(rxData[i], HEX);
     //   Serial.print(" ");
     // }
     Serial.println();
+    Serial.print("Received: ");
     for(int i=0;i< rxLen;i++) {
       if (rxData[i] > 0x1F && rxData[i] < 0x7F) {
         char myChar = rxData[i];
@@ -76,10 +76,11 @@ void loop() {
     String dataIn = Serial.readStringUntil('\n');
     if (dataIn != "") {
       
-      for (int i=0; i < dataIn.length(); i++)
+      for (int i=0; i < dataIn.length() - 1; i++)
         txData[i] = dataIn[i];
       // sprintf((char *)txData, dataIn);
       int len = dataIn.length();
+      Serial.print("ASCII transmitted: ");
       for (int i = 0; i < len; i++) {
         Serial.print(txData[i]);
         Serial.print(" ");
