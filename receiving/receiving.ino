@@ -89,10 +89,10 @@ void loop() {
     Serial.println(" dB");
     
     if (numTransmissions == 100) {
-      numTransmissions = 0;
       long int t1 = millis();
-      float dataRate = (numTransmissions * currSize) / ((t1 - t0) / 1000);
-      Serial.print(dataRate); Serial.println(" bytes per second");
+      float dataRate = (numTransmissions * currSize * 8) / ((t1 - t0) / 1000);
+      Serial.print(dataRate); Serial.println(" bits per second");
+      numTransmissions = 0;
     }
     delay(1);
   }
