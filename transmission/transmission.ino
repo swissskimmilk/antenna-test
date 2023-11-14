@@ -113,6 +113,6 @@ void loop()
 
     // Don't wait to finish
     // lora.Send(txData, len, SX126x_TXMODE_ASYNC);
-    delay(100);
+    // delay(100);
   }
 }
