@@ -30,7 +30,7 @@ char longString[] = "Space Technology At Berkeley SSEP2 Long Range Antenna Param
 char medString[] = "STAR SSEP2 Long Range Antenna Parameter Acquisition | Current parameters <Spreading factor ID %.2hu> <Bandwith ID %hu> <Coding rate ID %hu>";
 char shortString[] = "<Spreading factor ID %.2hu> <Bandwith ID %hu> <Coding rate ID %hu>";
 
-int transmissionsPerSetting = 100;
+int transmissionsPerSetting = 2;
 
 SX126x  lora(15,               //Port-Pin Output: SPI select
              21,               //Port-Pin Output: Reset 
@@ -42,7 +42,7 @@ void setup()
   delay(1000);
   Serial.begin(115200);
 
-  //lora.DebugPrint(true);
+  lora.DebugPrint(true);
 
   int16_t ret = lora.begin(RF_FREQUENCY,              //frequency in Hz
                            TX_OUTPUT_POWER);          //tx power in dBm
@@ -103,16 +103,16 @@ void loop()
     // Serial.println();
 
     // Wait for transmission to complete
-    if (lora.Send(txData, len, SX126x_TXMODE_SYNC)) {
-      Serial.println("Send success");
-    } else {
-      Serial.println("Send fail");
-      break;
-    }
-    delay(1);
+    // if (lora.Send(txData, len, SX126x_TXMODE_SYNC)) {
+    //   Serial.println("Send success");
+    // } else {
+    //   Serial.println("Send fail");
+    //   break;
+    // }
+    // delay(1);
 
     // Don't wait to finish
-    // lora.Send(txData, len, SX126x_TXMODE_ASYNC);
-    // delay(100);
+    lora.Send(txData, len, SX126x_TXMODE_ASYNC);
+    delay(1000);
   }
 }
